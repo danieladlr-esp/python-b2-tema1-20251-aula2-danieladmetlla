@@ -76,14 +76,14 @@ def find_product(name: str, category: str) -> Optional[Product]:
 
 
 # Para probar el código, descomenta las siguientes líneas
-if __name__ == "__main__":
-    add_product("Apples", "Fruits", 100, 0.50)
-    add_product("Pears", "Fruits", 50, 0.70)
-    add_product("Apples", "Fruits", 50, 0.55)
+# if __name__ == "__main__":
+#     add_product("Apples", "Fruits", 100, 0.50)
+#     add_product("Pears", "Fruits", 50, 0.70)
+#     add_product("Apples", "Fruits", 50, 0.55)
 
-    print(list_products())
-    found_product = find_product("Apples", "Fruits")
-    if found_product:
-        print(f"Product found: {found_product.name} ({found_product.category}) - {found_product.quantity} units at ${found_product.price} each")
-    else:
-        print("Product not found.")
+#     print(list_products())
+#     found_product = find_product("Apples", "Fruits")
+#     if found_product:
+#         print(f"Product found: {found_product.name} ({found_product.category}) - {found_product.quantity} units at ${found_product.price} each")
+#     else:
+#         print("Product not found.")

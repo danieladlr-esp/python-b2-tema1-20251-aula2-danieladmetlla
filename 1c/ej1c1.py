@@ -72,22 +72,22 @@ def merge(left: List[int], right: List[int]) -> List[int]:
 
 
 # Para probar el código, descomenta las siguientes líneas
-if __name__ == "__main__":
-    sizes = [100]  
-    for size in sizes:
-        test_array = [random.randint(1, 100) for _ in range(size)]
+# if __name__ == "__main__":
+#     sizes = [100]  
+#     for size in sizes:
+#         test_array = [random.randint(1, 100) for _ in range(size)]
         
-        print(f"\nOriginal array (first 10 elements of {size}):")
-        print(test_array[:10])  
+#         print(f"\nOriginal array (first 10 elements of {size}):")
+#         print(test_array[:10])  
         
-        start = time.time()
-        sorted_array_quicksort = quicksort(test_array.copy())
-        end_time = time.time() - start
-        print(f"Quicksort on {size} elements took: {end_time:.5f} seconds.")
-        print("First 10 elements after Quicksort:", sorted_array_quicksort[:10])
+#         start = time.time()
+#         sorted_array_quicksort = quicksort(test_array.copy())
+#         end_time = time.time() - start
+#         print(f"Quicksort on {size} elements took: {end_time:.5f} seconds.")
+#         print("First 10 elements after Quicksort:", sorted_array_quicksort[:10])
         
-        start = time.time()
-        sorted_array_mergesort = mergesort(test_array.copy())
-        end_time = time.time() - start
-        print(f"Mergesort on {size} elements took: {end_time:.5f} seconds.")
-        print("First 10 elements after Mergesort:", sorted_array_mergesort[:10])
+#         start = time.time()
+#         sorted_array_mergesort = mergesort(test_array.copy())
+#         end_time = time.time() - start
+#         print(f"Mergesort on {size} elements took: {end_time:.5f} seconds.")
+#         print("First 10 elements after Mergesort:", sorted_array_mergesort[:10])

@@ -78,9 +78,9 @@ def list_tasks() -> None:
 
 
 # Para probar el código, descomenta las siguientes líneas 
-if __name__ == "__main__":
-    id1 = create_task("Learn Python")
-    id2 = create_task("Read Enum documentation")
-    change_task_status(id1, TaskStatus.IN_PROGRESS)
-    change_task_status(id2, TaskStatus.COMPLETED)
-    list_tasks()
+# if __name__ == "__main__":
+#     id1 = create_task("Learn Python")
+#     id2 = create_task("Read Enum documentation")
+#     change_task_status(id1, TaskStatus.IN_PROGRESS)
+#     change_task_status(id2, TaskStatus.COMPLETED)
+#     list_tasks()

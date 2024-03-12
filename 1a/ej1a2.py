@@ -77,21 +77,21 @@ def find_next_event(events: List[Dict[str, str]]) -> Optional[Dict[str, str]]:
 
 
 # Para probar el código, descomenta las siguientes líneas
-if __name__ == "__main__":
-    event1 = create_event("Global Meeting", datetime(2024, 9, 10, 10, 0), "UTC")
-    event2 = create_event("Python Talk", datetime(2024, 9, 10, 18, 30), "America/New_York")
-    event3 = create_event("Data Science Workshop", datetime(2024, 9, 10, 12, 0), "Europe/London")
+# if __name__ == "__main__":
+#     event1 = create_event("Global Meeting", datetime(2024, 9, 10, 10, 0), "UTC")
+#     event2 = create_event("Python Talk", datetime(2024, 9, 10, 18, 30), "America/New_York")
+#     event3 = create_event("Data Science Workshop", datetime(2024, 9, 10, 12, 0), "Europe/London")
 
-    for event in [event1, event2, event3]:
-        time_to_event = time_until_event(event)
-        print(f"Time until '{event['name']}':", time_to_event)
+#     for event in [event1, event2, event3]:
+#         time_to_event = time_until_event(event)
+#         print(f"Time until '{event['name']}':", time_to_event)
 
-    changed_event1 = change_event_timezone(event1, "America/New_York")
-    print(f"Event after timezone change: {changed_event1}")
+#     changed_event1 = change_event_timezone(event1, "America/New_York")
+#     print(f"Event after timezone change: {changed_event1}")
 
-    events = [event1, event2, event3]
-    next_event = find_next_event(events)
-    if next_event:
-        print("\nThe next event is:", next_event["name"])
-    else:
-        print("There are no future events.")
+#     events = [event1, event2, event3]
+#     next_event = find_next_event(events)
+#     if next_event:
+#         print("\nThe next event is:", next_event["name"])
+#     else:
+#         print("There are no future events.")

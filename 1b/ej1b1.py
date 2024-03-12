@@ -69,7 +69,7 @@ def mcm_list(numbers: List[int]) -> int:
 
 
 # Para probar el código, descomenta las siguientes líneas
-if __name__ == "__main__":
-    numbers = [4, 6]
-    print(f"The MCD of {numbers} is {mcd_list(numbers)}.")
-    print(f"The MCM of {numbers} is {mcm_list(numbers)}.")
+# if __name__ == "__main__":
+    # numbers = [4, 6]
+    # print(f"The MCD of {numbers} is {mcd_list(numbers)}.")
+    # print(f"The MCM of {numbers} is {mcm_list(numbers)}.")
