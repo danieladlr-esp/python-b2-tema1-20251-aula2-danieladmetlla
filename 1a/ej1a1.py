@@ -37,21 +37,23 @@ from typing import ByteString, Union
 
 
 def text_to_bytes(text: str) -> bytes:
-    return text.encode('')
+    # Write here your code
+    pass
 
 
 def reverse_bytes(bytes_data: ByteString) -> bytearray:
-    return bytearray()
+    # Write here your code
+    pass
 
 
 def increment_bytearray_rollover(byte_array: bytearray) -> bytearray:
-    for i in range(len()):
-        byte_array[i] = () % 256
-    return byte_array
+    # Write here your code
+    pass
 
 
 def bytes_to_text(bytes_data: Union[bytes, bytearray]) -> str:
-    return bytes_data.decode('')
+    # Write here your code
+    pass
 
 
 # Para probar el código, descomenta las siguientes líneas

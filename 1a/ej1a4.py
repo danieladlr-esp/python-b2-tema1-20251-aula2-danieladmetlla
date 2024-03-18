@@ -59,22 +59,18 @@ tasks: Dict[int, Task] = {}
 
 
 def create_task(title: str) -> int:
-    task_id =
-    tasks[task_id] =
-    return task_id
+    # Write here your code
+    pass
 
 
 def change_task_status(task_id: int, new_status: TaskStatus) -> bool:
-    if task_id in tasks:
-        task =
-        tasks[task_id] =
-        return True
-    return False
+    # Write here your code
+    pass
 
 
 def list_tasks() -> None:
-    for task in tasks.values():
-        print(f"ID: {task.id}, Title: {task.title}, Status: {task.status.value}")
+    # Write here your code
+    pass
 
 
 # Para probar el código, descomenta las siguientes líneas 

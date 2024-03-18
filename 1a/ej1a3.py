@@ -4,6 +4,17 @@ Desarrolla un sistema de gestión de préstamos de libros en una biblioteca util
 préstamos y devoluciones, además de mantener un registro de la popularidad de los libros mediante el uso de colecciones
 avanzadas en Python, como `namedtuple`, `defaultdict` y `Counter`.
 
+Para lo cual se debe seguir los siguientes pasos:
+    1. Definir los tipos `Book` y `User` utilizando `namedtuple`.
+    2. Crear un diccionario con las siguientes clases `loans: Dict[User, List[Book]]` para almacenar los préstamos.
+    3. Crear un objeto tipo Counter para almacenar la popularidad de los libros.
+    4. Crear algunos ejemplos de usuario.
+    5. Crear algunos ejemplos de libros.
+    6. Registrar préstamos y devoluciones de libros.
+    7. Mostrar los libros más populares.
+    8. Desarrollar las funciones `define_types`, `register_loan`, `register_return` y `most_popular_books` para las
+        operaciones anteriores.
+
 Funciones a desarrollar:
 - define_types() -> Tuple[namedtuple, namedtuple]:
     Descripción:
@@ -32,13 +43,29 @@ Funciones a desarrollar:
     para determinar la popularidad.
 
 Ejemplo:
-    Book, User = define_types()
-    loans: Dict[User, List[Book]] = defaultdict(list)
-    popularity: Counter = Counter()
+
+    user1 = User(name="John Doe", email="john@example.com")
+    book1 = Book(title="Python 101", author="Someone", isbn="1234567890")
+
+    loan1 = register_loan(user1, book1)
+
+    return1 = register_return(user1, book1)
+
+    print("Loan 1 registered:", loan1)
+    print("Return 1 registered:", return1)
+
+    popular_books = most_popular_books(2)
+    print("Most popular books:", [(book.title, count) for book, count in popular_books])
 
 Salida esperada:
-- Registro exitoso de préstamos y devoluciones, y una lista de los libros más populares basada en la frecuencia de
-préstamos.
+- Registro de préstamos.
+    "John Doe has borrowed: ['Python 101']"
+
+- Registro de devoluciones.
+    "Jane Smith has borrowed: ['Python 101', 'Advanced Python']"
+
+- Libros más populares basada en la frecuencia de préstamos.
+    "Most popular books: [('Python 101', 2), ('Advanced Python', 1)]"
 """
 
 
@@ -47,27 +74,23 @@ from typing import Tuple, Dict, List, Type
 
 
 def define_types() -> Tuple[Type[namedtuple], Type[namedtuple]]:
-    Book = namedtuple()
-    User = namedtuple()
-    return Book, User
+    # Write here your code
+    pass
 
 
 def register_loan(loans: dict[Type[namedtuple], list[Type[namedtuple]]], popularity: Counter, user: Type[namedtuple], book: Type[namedtuple]) -> bool:
-    loans[user].append()
-    popularity[book]
-    return True
+    # Write here your code
+    pass
 
 
 def register_return(loans: dict[Type[namedtuple], list[Type[namedtuple]]], user: Type[namedtuple], book: Type[namedtuple]) -> bool:
-    if book in loans[]:
-        
-        return True
-    return False
+    # Write here your code
+    pass
 
 
 def most_popular_books(popularity: Counter, N: int = 3) -> List[Tuple[namedtuple, int]]:
-    return popularity
-
+    # Write here your code
+    pass
 
 # Para probar el código, descomenta las siguientes líneas
 # if __name__ == "__main__":
