@@ -7,7 +7,8 @@ Funciones a desarrollar:
 - `create_task(title: str) -> int`:
     Descripción:
     Añade una nueva tarea al sistema con un estado inicial "Pendiente". La función genera un ID único para cada tarea,
-    lo asigna junto con el título proporcionado, y retorna el ID de la tarea creada.
+    lo asigna junto con el título proporcionado, y retorna el ID de la tarea creada, mantiene la siguiente estructura:
+    `tasks[id] = Task(id, title, TaskStatus.PENDING)`.
     Parámetros:
         - `title` (str): El título de la tarea a crear.
 
@@ -21,7 +22,9 @@ Funciones a desarrollar:
 
 - `list_tasks() -> None`:
     Descripción:
-    Imprime una lista de todas las tareas registradas, mostrando su ID, título y estado actual.
+    Imprime una lista de todas las tareas registradas, manteniendo el siguiente formato: "ID: {task.id},
+    Title: {task.title}, Status: {task.status.value}".
+
 
 Clases y Enums:
 - `TaskStatus(Enum)`: Define los posibles estados de una tarea, incluyendo "Pendiente", "En Progreso" y "Completada".

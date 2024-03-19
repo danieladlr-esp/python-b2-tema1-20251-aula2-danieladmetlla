@@ -35,6 +35,7 @@ Ejemplo:
 Salida esperada:
 - Creación y actualización de productos en el inventario mediante una lista detallada de todos los productos, con sus
 nombres, categorías, cantidades y precios.
+
 - Buscar productos específicos en el inventario de una tienda mediante `dataclasses`.
 """
 
@@ -54,13 +55,24 @@ inventory: Dict[Tuple[str, str], Product] = {}
 
 
 def add_product(name: str, category: str, quantity: int, price: float) -> Product:
-    # Write here your code
+    # Complete the code
     pass
+    key = (name, category)
+    if key in :
+        existing_product = 
+        existing_product. += 
+        existing_product. = 
+    else:
+         = Product
+    return 
 
 
 def list_products() -> str:
-    # Write here your code
+    # Complete the code
     pass
+    for product in :
+            (f"{product.name} ({product.category}) - {product.quantity} units at ${product.price} each")
+        return
 
 
 def find_product(name: str, category: str) -> Optional[Product]:
