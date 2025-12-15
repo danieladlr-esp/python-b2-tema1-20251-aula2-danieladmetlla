@@ -74,22 +74,29 @@ from typing import Tuple, Dict, List, Type
 
 
 def define_types() -> Tuple[Type[namedtuple], Type[namedtuple]]:
-    # Write here your code
+    Book = namedtuple("Book", ["title", "author", "isbn"])
+    User = namedtuple("User", ["name", "email"])
+    return Book, User
     pass
 
 
 def register_loan(loans: dict[Type[namedtuple], list[Type[namedtuple]]], popularity: Counter, user: Type[namedtuple], book: Type[namedtuple]) -> bool:
-    # Write here your code
+   loan[user].append(book)
+   popularity[book] += 1
+   return True
     pass
 
 
 def register_return(loans: dict[Type[namedtuple], list[Type[namedtuple]]], user: Type[namedtuple], book: Type[namedtuple]) -> bool:
-    # Write here your code
+    if book in loans[user]:
+        loans[user].remove(book)
+        return True
+    return False
     pass
 
 
 def most_popular_books(popularity: Counter, N: int = 3) -> List[Tuple[namedtuple, int]]:
-    # Write here your code
+   return popularity.most_common(N)
     pass
 
 # Para probar el código, descomenta las siguientes líneas
