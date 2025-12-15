@@ -37,22 +37,24 @@ from typing import ByteString, Union
 
 
 def text_to_bytes(text: str) -> bytes:
-    # Write here your code
+    assert text_to_bytes("Hello") == b"Hello", "Should encode text to bytes"
     pass
 
 
 def reverse_bytes(bytes_data: ByteString) -> bytearray:
-    # Write here your code
+   assert reverse_bytes(b"Hello")[0] == ord("o"), The first byte sould be the last character's ASCII value"
     pass
 
 
 def increment_bytearray_rollover(byte_array: bytearray) -> bytearray:
-    # Write here your code
+    byte_array =bytearray([225, 0, 1, 254])
+    incremented = increment_bytearray_rollover(byte_array)
+    assert incremented == bytearray([0, 1, 2, 255]), "Should increment each byte and rollover at 256"
     pass
 
 
 def bytes_to_text(bytes_data: Union[bytes, bytearray]) -> str:
-    # Write here your code
+   assert bytes_to_text(b"Hello") == "Hello", "Should decode bytes to text"
     pass
 
 
