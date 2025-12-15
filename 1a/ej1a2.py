@@ -66,23 +66,37 @@ import pytz
 
 
 def create_event(name: str, datetime_start: datetime, timezone_str: str) -> Dict[str, str]:
-    # Write here your code
+  name = "Test Event"
+  datetime_start = datetime(2023, 1, 1, 12, 0)
+  timezone_str = "UTC"
+  event = create_event(name, datetime_start, timezone_str)
+  assert event["name"] == name, "Event name should match the input."
+  assert event["timezone"] == timezone_str, "Event timezone should match the imput."
+  expected_datetime = pytz.timezone(timezone_str).localize(datetime_start)
+  assert event["datetime_start"] == expected_datetime, "Event datetime should macth the localize input."
     pass
 
 
 def time_until_event(event: Dict[str, str]) -> timedelta:
-    # Write here your code
+    future_date = datetime.now() + timedelta(days=1)
+    event = create_event("Future Event", future_date, "UTC")
+    assert time_until_event(event) > timedelta(), "The event should be in the future."
     pass
 
 
 def change_event_timezone(event: Dict[str, str], new_timezone_str: str) -> Dict[str, str]:
-    # Write here your code
+   event = create_event("Test Event", datetime(2023, 1, 1, 12, 0), "UTC")
+   changed_event = change_event_timezone(event, "America/New_York")
+   assert changed_event["timezone"] == "America/New_York", "The timezone should be update "America/New_York")
     pass
 
 
 def find_next_event(events: List[Dict[str, str]]) -> Optional[Dict[str, str]]:
-    # Write here your code
-    pass
+   event1 = create_event("Past Event", datetime(now) - timedelta(days=1), "UTC")
+   future_date = datetime(now) + timedelta(days=1)
+   event2 =  created_event["Future Event", future_date, "UTC")
+   next_event = finde_next_event([event1, event2)
+   assert next_event is not None and next_event["name"] == "Future Event", "The next event should be 'Future Event'"
 
 
 # Para probar el código, descomenta las siguientes líneas
