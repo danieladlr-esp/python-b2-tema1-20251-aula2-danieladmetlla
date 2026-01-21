@@ -66,41 +66,65 @@ import pytz
 
 
 def create_event(name: str, datetime_start: datetime, timezone_str: str) -> Dict[str, str]:
-    # Write here your code
-    pass
+    timezone = pytz.timezone(timezone_str)
+    localized_datetime = datetime_start.replace(tzinfo=timezone)
+    return {
+        "name": name,
+        "datetime_start": localized_datetime,
+        "timezone": timezone_str
 
 
 def time_until_event(event: Dict[str, str]) -> timedelta:
-    # Write here your code
-    pass
+    event_timezone = pytz.timezone(event["timezone"])
+    event_datetime = event["datetime_start"]
+    if event_datetime.tzinfo is none:
+        event_datetime = event_timezone.localize(event_datetime)
+
+    current_datetime = datetime.now(event_timezone)
+    
+    return event_datetime - current_datetime
 
 
 def change_event_timezone(event: Dict[str, str], new_timezone_str: str) -> Dict[str, str]:
-    # Write here your code
-    pass
+    new_event = event.copy()
+    
+    old_timezone = pytz.timezone(event["timezone"])
+    new_timezone = pytz.timezone(new_timezone_str)
+
+    event_datetime = event["datetime_start"]
+
+    if event_datetime.tzinfo is None:
+        event_datetime = old_timezone.localize(event_datetime)
+
+    new_datetime = event_datetime.astimezone(new_timezone)
+    new_event["datatime_start"] = new_datetime
+    new_event["timezone"] = new_timezone-str
+
+    return new_event
 
 
 def find_next_event(events: List[Dict[str, str]]) -> Optional[Dict[str, str]]:
-    # Write here your code
-    pass
+    current_utc = datetime.now(pytz.UTC)
+
+    next_event = None
+    min_time_diff = None
+
+    for event in events:
+        event_datetime = event["datetime_start"]
+        if event_datetime.tzinfo is not None:
+            event_utc = event_datetime.astimezone(pytz.UTC)
+
+        else:
+
+            timezone = pytz.timezone(event["timezone"])
+            event_utc = timezone.localize(event_datetime).astimezone(pytz.UTC)
+
+    time_diff = event_utc - current_utc
+    if time_diff.total_seconds() > 0:
+        if min_time_diff is None or time_diff < min_time_diff:
+            min_time_diff = time_diff
+            next_event = event
+            
+    return next_event
 
 
-# Para probar el código, descomenta las siguientes líneas
-# if __name__ == "__main__":
-#     event1 = create_event("Global Meeting", datetime(2024, 9, 10, 10, 0), "UTC")
-#     event2 = create_event("Python Talk", datetime(2024, 9, 10, 18, 30), "America/New_York")
-#     event3 = create_event("Data Science Workshop", datetime(2024, 9, 10, 12, 0), "Europe/London")
-
-#     for event in [event1, event2, event3]:
-#         time_to_event = time_until_event(event)
-#         print(f"Time until '{event['name']}':", time_to_event)
-
-#     changed_event1 = change_event_timezone(event1, "America/New_York")
-#     print(f"Event after timezone change: {changed_event1}")
-
-#     events = [event1, event2, event3]
-#     next_event = find_next_event(events)
-#     if next_event:
-#         print("\nThe next event is:", next_event["name"])
-#     else:
-#         print("There are no future events.")
