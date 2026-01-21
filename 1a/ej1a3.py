@@ -74,49 +74,100 @@ from typing import Tuple, Dict, List, Type
 
 
 def define_types() -> Tuple[Type[namedtuple], Type[namedtuple]]:
-    # Write here your code
-    pass
+    Book = namedtuple("Book", ["title", "author", "isbn"])
+    User = namedtuple("User", ["name", "email"])
+    return Book, User
 
 
 def register_loan(loans: dict[Type[namedtuple], list[Type[namedtuple]]], popularity: Counter, user: Type[namedtuple], book: Type[namedtuple]) -> bool:
-    # Write here your code
-    pass
+    if book in loan[user]:
+        return False
+
+    loans[user].append(book)
+    popularity[book] += 1
+    return True
 
 
 def register_return(loans: dict[Type[namedtuple], list[Type[namedtuple]]], user: Type[namedtuple], book: Type[namedtuple]) -> bool:
-    # Write here your code
-    pass
+    if book in loans[user]:
+        loans[user].remove(book)
+        return True
+
+    else:
+        return False
 
 
 def most_popular_books(popularity: Counter, N: int = 3) -> List[Tuple[namedtuple, int]]:
-    # Write here your code
-    pass
+    most_common = popularity.most_common(N)
+    result = [(book, count) for book, count in most_common if count > 0]
+    return result
 
 # Para probar el código, descomenta las siguientes líneas
-# if __name__ == "__main__":
-
-#     Book, User = define_types()
-#     loans: Dict[User, List[Book]] = defaultdict(list)
-#     popularity: Counter = Counter()
+if __name__ == "__main__":
+    # Definir los tipos
+    Book, User = define_types()
     
-#     user1 = User(name="John Doe", email="john@example.com")
-#     user2 = User(name="Jane Smith", email="jane@example.com")
+    # Inicializar estructuras de datos
+    loans: Dict[User, List[Book]] = defaultdict(list)
+    popularity: Counter = Counter()
     
-#     book1 = Book(title="Python 101", author="Someone", isbn="1234567890")
-#     book2 = Book(title="Learn Python", author="Another One", isbn="0987654321")
-#     book3 = Book(title="Advanced Python", author="Expert Author", isbn="1122334455")
-#     book4 = Book(title="Python Data Science", author="Data Scientist", isbn="2233445566")
-
-#     register_loan(loans, popularity, user1, book1)
-#     register_loan(loans, popularity, user2, book1)
-#     register_loan(loans, popularity, user2, book3)
-#     register_loan(loans, popularity, user1, book4)
+    # Crear usuarios
+    user1 = User(name="John Doe", email="john@example.com")
+    user2 = User(name="Jane Smith", email="jane@example.com")
+    user3 = User(name="Bob Johnson", email="bob@example.com")
     
-#     register_return(loans, user1, book4)
+    # Crear libros
+    book1 = Book(title="Python 101", author="Someone", isbn="1234567890")
+    book2 = Book(title="Learn Python", author="Another One", isbn="0987654321")
+    book3 = Book(title="Advanced Python", author="Expert Author", isbn="1122334455")
+    book4 = Book(title="Python Data Science", author="Data Scientist", isbn="2233445566")
     
-#     for user, books in loans.items():
-#         book_titles = [book.title for book in books]
-#         print(f"{user.name} has borrowed: {book_titles}")
+    print("=== Sistema de Gestión de Préstamos de Biblioteca ===\n")
     
-#     popular_books = most_popular_books(popularity, 2)
-#     print("Most popular books based on loans:", [(book.title, count) for book, count in popular_books])
+    # Registrar préstamos
+    print("Registrando préstamos...")
+    print(f"Préstamo 1 (John -> Python 101): {register_loan(loans, popularity, user1, book1)}")
+    print(f"Préstamo 2 (Jane -> Python 101): {register_loan(loans, popularity, user2, book1)}")
+    print(f"Préstamo 3 (Jane -> Advanced Python): {register_loan(loans, popularity, user2, book3)}")
+    print(f"Préstamo 4 (Bob -> Python 101): {register_loan(loans, popularity, user3, book1)}")
+    print(f"Préstamo 5 (John -> Python Data Science): {register_loan(loans, popularity, user1, book4)}")
+    print(f"Préstamo 6 (Bob -> Learn Python): {register_loan(loans, popularity, user3, book2)}")
+    
+    # Intentar préstamo duplicado
+    print(f"Préstamo duplicado (Jane -> Python 101): {register_loan(loans, popularity, user2, book1)}\n")
+    
+    # Mostrar préstamos actuales
+    print("Préstamos actuales:")
+    for user, books in loans.items():
+        if books:  # Solo mostrar usuarios con préstamos
+            book_titles = [book.title for book in books]
+            print(f"  {user.name} ha prestado: {book_titles}")
+    
+    # Registrar devoluciones
+    print("\nRegistrando devoluciones...")
+    print(f"Devolución 1 (John -> Python Data Science): {register_return(loans, user1, book4)}")
+    print(f"Devolución 2 (Jane -> Advanced Python): {register_return(loans, user2, book3)}")
+    print(f"Devolución 3 (Intento inválido -> John -> Learn Python): {register_return(loans, user1, book2)}\n")
+    
+    # Mostrar préstamos después de devoluciones
+    print("Préstamos después de devoluciones:")
+    for user, books in loans.items():
+        if books:  # Solo mostrar usuarios con préstamos
+            book_titles = [book.title for book in books]
+            print(f"  {user.name} ha prestado: {book_titles}")
+    
+    # Mostrar libros más populares
+    print("\nLibros más populares (top 3):")
+    popular_books = most_popular_books(popularity, 3)
+    for i, (book, count) in enumerate(popular_books, 1):
+        print(f"  {i}. '{book.title}' por {book.author}: {count} préstamos")
+    
+    # Mostrar estadísticas
+    print(f"\nEstadísticas:")
+    print(f"  Total de libros diferentes: {len(popularity)}")
+    print(f"  Total de préstamos registrados: {sum(popularity.values())}")
+    
+    # Mostrar el libro más popular
+    if popular_books:
+        most_popular = popular_books[0]
+        print(f"  Libro más popular: '{most_popular[0].title}' con {most_popular[1]} préstamos")
