@@ -59,27 +59,101 @@ class Task(NamedTuple):
     
     
 tasks: Dict[int, Task] = {}
-
+next_id = 1
 
 def create_task(title: str) -> int:
-    # Write here your code
-    pass
-
+    global next_id, tasks
+    new_task = Task(id=next_id, title=title, status=TaskStatus.PENDING)
+    task[next_id] = new_task
+    current_id = next_id
+    next_id += 1
+    return current_id
 
 def change_task_status(task_id: int, new_status: TaskStatus) -> bool:
-    # Write here your code
-    pass
+    global tasks
+    if task_id not in tasks:
+        return False
+
+    current_task = tasks[task_id]
+    updated_task = Task(
+        id=current_task.id,
+        title=current_task.title,
+        status=new_status
+    )
+    tasks[task_id] = updated_task
+    return True
 
 
 def list_tasks() -> None:
-    # Write here your code
-    pass
+    global tasks
+    if not tasks:
+        print("No hay tareas registradas.")
+        return
 
+    print("\n== Lista de tareas ===")
+    print("_" * 40)
+
+    for task_id, task in sorted(tasks.items()):
+        print(f"ID: {task.id}, Title: {task.title}, status: {task.status.value}")
+
+    print("_" * 40)
+    status_counts = {}
+    for task in tasks.values():
+        status = task.status.value
+        status_counts[status] = status_counts.get(status, 0) + 1
+
+    print("\nEstadísticas:")
+    for status, count in status_counts.items():
+        print(f" {status}: {count} tareas(s)")
 
 # Para probar el código, descomenta las siguientes líneas 
-# if __name__ == "__main__":
-#     id1 = create_task("Learn Python")
-#     id2 = create_task("Read Enum documentation")
-#     change_task_status(id1, TaskStatus.IN_PROGRESS)
-#     change_task_status(id2, TaskStatus.COMPLETED)
-#     list_tasks()
+if __name__ == "__main__":
+    print("=== Sistema de Gestión de Tareas ===\n")
+    
+    # Crear tareas
+    print("Creando tareas...")
+    id1 = create_task("Learn Python")
+    print(f"  Tarea creada: ID={id1}, 'Learn Python'")
+    
+    id2 = create_task("Read Enum documentation")
+    print(f"  Tarea creada: ID={id2}, 'Read Enum documentation'")
+    
+    id3 = create_task("Complete project")
+    print(f"  Tarea creada: ID={id3}, 'Complete project'")
+    
+    id4 = create_task("Write documentation")
+    print(f"  Tarea creada: ID={id4}, 'Write documentation'")
+    
+    # Actualizar estados de tareas
+    print("\nActualizando estados de tareas...")
+    
+    # Cambiar tarea 1 a "En Progreso"
+    result1 = change_task_status(id1, TaskStatus.IN_PROGRESS)
+    print(f"  Tarea {id1} -> 'In Progress': {'Éxito' if result1 else 'Fallo'}")
+    
+    # Cambiar tarea 2 a "Completada"
+    result2 = change_task_status(id2, TaskStatus.COMPLETED)
+    print(f"  Tarea {id2} -> 'Completed': {'Éxito' if result2 else 'Fallo'}")
+    
+    # Cambiar tarea 3 a "En Progreso"
+    result3 = change_task_status(id3, TaskStatus.IN_PROGRESS)
+    print(f"  Tarea {id3} -> 'In Progress': {'Éxito' if result3 else 'Fallo'}")
+    
+    # Intentar cambiar una tarea que no existe
+    result4 = change_task_status(999, TaskStatus.COMPLETED)
+    print(f"  Tarea 999 -> 'Completed': {'Éxito' if result4 else 'Fallo'} (tarea inexistente)")
+    
+    # Listar todas las tareas
+    print("\nListando todas las tareas:")
+    list_tasks()
+    
+    # Ejemplo adicional: completar más tareas
+    print("\nCompletando más tareas...")
+    change_task_status(id1, TaskStatus.COMPLETED)
+    change_task_status(id3, TaskStatus.COMPLETED)
+    change_task_status(id4, TaskStatus.IN_PROGRESS)
+    
+    # Listar tareas después de cambios
+    print("\nListando tareas después de cambios:")
+    list_tasks()
+
