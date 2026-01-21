@@ -127,4 +127,33 @@ def find_next_event(events: List[Dict[str, str]]) -> Optional[Dict[str, str]]:
             
     return next_event
 
+# Para probar el código, descomenta las siguientes líneas
+if __name__ == "__main__":
+    # Crear eventos de ejemplo
+    event1 = create_event("Global Meeting", datetime(2024, 9, 10, 10, 0), "UTC")
+    event2 = create_event("Python Talk", datetime(2024, 9, 10, 18, 30), "America/New_York")
+    event3 = create_event("Data Science Workshop", datetime(2024, 9, 10, 12, 0), "Europe/London")
+
+    print("Eventos creados:")
+    for event in [event1, event2, event3]:
+        print(f"  {event['name']}: {event['datetime_start']} ({event['timezone']})")
+    
+    print("\nTiempo hasta cada evento:")
+    for event in [event1, event2, event3]:
+        time_to_event = time_until_event(event)
+        print(f"Time until '{event['name']}': {time_to_event}")
+
+    print("\nCambio de zona horaria:")
+    changed_event1 = change_event_timezone(event1, "America/New_York")
+    print(f"Event after timezone change: {changed_event1}")
+
+    print("\nBuscar próximo evento:")
+    events = [event1, event2, event3]
+    next_event = find_next_event(events)
+    if next_event:
+        print(f"The next event is: {next_event['name']}")
+        print(f"  Scheduled at: {next_event['datetime_start']} ({next_event['timezone']})")
+    else:
+        print("There are no future events.")
+
 
