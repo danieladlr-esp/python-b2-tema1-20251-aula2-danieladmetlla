@@ -46,30 +46,65 @@ from typing import List
 
 def mcd(a: int, b: int) -> int:
     while b:
+        a, b = b, a % b
         
     return a
 
 
 def mcd_list(numbers: List[int]) -> int:
-    result = 
+    if not numbers:
+        return 0
+    result =  numbers[0]
     for number in numbers[1:]:
-        result = 
+        result = mcd(result, number)
     return result
 
 
 def mcm(a: int, b: int) -> int:
-    return 
+    if a == 0 or b == 0:
+        return 0
+    return abs(a * b) // mcd(a, b)
+    
 
 
 def mcm_list(numbers: List[int]) -> int:
-    result = 
+    if not numbers:
+        return 0
+    result = numbers[0]
     for number in numbers[1:]:
-        result = 
+        result = mcm(result, number)
     return result
 
 
 # Para probar el código, descomenta las siguientes líneas
-# if __name__ == "__main__":
-    # numbers = [4, 6]
-    # print(f"The MCD of {numbers} is {mcd_list(numbers)}.")
-    # print(f"The MCM of {numbers} is {mcm_list(numbers)}.")
+if __name__ == "__main__":
+    # Pruebas básicas
+    print("=== Pruebas de MCD y MCM ===\n")
+    
+    # Test 1: Dos números
+    a, b = 48, 18
+    print(f"MCD({a}, {b}) = {mcd(a, b)}")
+    print(f"MCM({a}, {b}) = {mcm(a, b)}")
+    
+    # Test 2: Lista de números
+    numbers1 = [12, 18, 24]
+    print(f"\nMCD de {numbers1} = {mcd_list(numbers1)}")
+    print(f"MCM de {numbers1} = {mcm_list(numbers1)}")
+    
+    # Test 3: Ejemplo del enunciado
+    numbers2 = [4, 6, 8, 20]
+    print(f"\nPara {numbers2}:")
+    print(f"  MCD = {mcd_list(numbers2)}")
+    print(f"  MCM = {mcm_list(numbers2)}")
+    
+    # Test 4: Casos especiales
+    numbers3 = [0, 5, 10]
+    print(f"\nCaso especial {numbers3}:")
+    print(f"  MCD = {mcd_list(numbers3)}")
+    print(f"  MCM = {mcm_list(numbers3)} (0 significa indefinido)")
+    
+    # Test 5: Números primos
+    numbers4 = [7, 13, 19]
+    print(f"\nNúmeros primos {numbers4}:")
+    print(f"  MCD = {mcd_list(numbers4)} (son primos relativos)")
+    print(f"  MCM = {mcm_list(numbers4)} = {7*13*19}")
